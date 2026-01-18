@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Agendamentos | Institucional Azul</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Noto+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        advBlue: '#003366',
+                        advBlueDark: '#002244',
+                        advGold: '#C59217',
+                        advSilver: '#8A8D8F',
+                        advLight: '#F0F4F8',
+                    },
+                    fontFamily: {
+                        serif: ['Noto Serif', 'serif'],
+                        sans: ['Noto Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .active-agenda {
+            border-left: 4px solid #C59217;
+            background-color: #E6EEF5;
+            color: #003366;
+            font-weight: bold;
+        }
+        .calendar-container {
+            transition: all 0.3s ease;
+        }
+        .bg-subtle-pattern {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#003366 0.5px, transparent 0.5px);
+            background-size: 30px 30px;
+            background-opacity: 0.03;
+        }
+        /* Menu mobile */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        .menu-open {
+            transform: translateX(0) !important;
+        }
+        /* Estilos do Modal de Vídeo */
+        #video-modal {
+            transition: opacity 0.4s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-subtle-pattern text-gray-800 font-sans overflow-x-hidden">
+
+    <!-- Modal de Vídeo (Popup Inicial) -->
+    <div id="video-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none">
+        <div class="relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 ease-out" id="modal-content">
+            <!-- Header do Modal -->
+            <div class="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/60 to-transparent flex justify-between items-center z-10 text-white">
+                <h3 class="font-bold text-lg font-serif">Bem-vindo à nossa Central</h3>
+                <button onclick="closeVideoModal()" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <!-- Video Container (Proporção 16:9) -->
+            <div class="aspect-video bg-black">
+                <!-- Substitua o ID do vídeo (Ex: dQw4w9WgXcQ) pelo vídeo institucional desejado -->
+                <iframe 
+                    id="intro-video"
+                    class="w-full h-full"
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1&autoplay=0" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- Rodapé do Modal -->
+            <div class="p-4 bg-white flex justify-between items-center">
+                <p class="text-sm text-gray-500">Saiba como agendar o seu atendimento em menos de 1 minuto.</p>
+                <button onclick="closeVideoModal()" class="px-6 py-2 bg-advBlue text-white font-bold rounded-lg hover:bg-advBlueDark transition">
+                    Continuar para o Site
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegação Superior -->
+    <nav class="fixed w-full z-50 bg-white border-b border-gray-200 py-3 px-6 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-advBlue rounded flex items-center justify-center shadow-inner">
+                <i class="fas fa-calendar-alt text-white text-lg"></i>
+            </div>
+            <div>
+                <span class="block text-lg font-bold text-advBlue leading-none tracking-tight font-serif uppercase">Adventista</span>
+                <span class="text-[10px] uppercase tracking-widest text-advSilver font-semibold">Agendamentos Oficiais</span>
+            </div>
+        </div>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center space-x-6">
+            <a href="#" class="text-sm font-medium hover:text-advBlue transition">Início</a>
+            <div class="relative group">
+                <button class="flex items-center space-x-1 text-sm font-medium text-advBlue hover:text-advGold transition">
+                    <span>Menu de Agendas</span>
+                    <i class="fas fa-chevron-down text-[10px]"></i>
+                </button>
+                <div class="absolute right-0 mt-2 w-56 bg-white border border-gray-100 shadow-2xl rounded-md py-2 hidden group-hover:block animate-in fade-in slide-in-from-top-2">
+                    <a href="javascript:void(0)" onclick="switchAgenda('secretaria')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Agenda Geral</a>
+                    <a href="javascript:void(0)" onclick="switchAgenda('pastoral')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Gabinete Pastoral</a>
+                    <a href="javascript:void(0)" onclick="switchAgenda('tesouraria')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Tesouraria e Dízimos</a>
+                    <a href="javascript:void(0)" onclick="switchAgenda('educacao')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Coordenação Pedagógica</a>
+                </div>
+            </div>
+            <a href="#agendar" class="bg-advBlue text-white px-6 py-2 rounded text-sm font-bold hover:bg-advBlueDark transition shadow-lg">
+                MARCAR AGORA
+            </a>
+        </div>
+
+        <!-- Botão Menu Mobile -->
+        <button id="menu-toggle" class="md:hidden text-advBlue p-2 focus:outline-none">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </nav>
+
+    <!-- Sidebar / Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 w-64 bg-white shadow-2xl z-[60] transform translate-x-full md:hidden flex flex-col">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+            <span class="font-bold text-advBlue font-serif">Navegação</span>
+            <button id="menu-close" class="text-advBlue"><i class="fas fa-times text-xl"></i></button>
+        </div>
+        <div class="p-4 flex flex-col space-y-2">
+            <a href="#" class="p-3 text-sm font-medium rounded-lg hover:bg-advLight transition">Início</a>
+            <hr class="border-gray-100">
+            <span class="px-3 pt-2 text-[10px] uppercase tracking-widest text-advSilver font-bold">Trocar Agenda</span>
+            <button onclick="switchAgenda('secretaria'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
+                <i class="fas fa-file-invoice mr-3 w-4 text-advGold"></i> Agenda Geral
+            </button>
+            <button onclick="switchAgenda('pastoral'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
+                <i class="fas fa-bible mr-3 w-4 text-advGold"></i> Pastoral
+            </button>
+            <button onclick="switchAgenda('tesouraria'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
+                <i class="fas fa-coins mr-3 w-4 text-advGold"></i> Tesouraria
+            </button>
+            <button onclick="switchAgenda('educacao'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
+                <i class="fas fa-graduation-cap mr-3 w-4 text-advGold"></i> Educação
+            </button>
+        </div>
+        <div class="mt-auto p-4 border-t border-gray-100">
+            <a href="#agendar" onclick="toggleMenu()" class="block w-full text-center bg-advBlue text-white py-3 rounded font-bold text-sm">MARCAR AGORA</a>
+        </div>
+    </div>
+    
+    <!-- Backdrop para o menu mobile -->
+    <div id="menu-backdrop" class="fixed inset-0 bg-black/50 z-[55] hidden md:hidden"></div>
+
+    <!-- Hero / Header -->
+    <header class="pt-32 pb-12 bg-gradient-to-b from-white to-advLight border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 text-center md:text-left">
+            <div class="inline-block bg-advBlue/10 text-advBlue text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">
+                Serviço de Atendimento ao Membro
+            </div>
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-advBlue mb-4 leading-tight">Central de Agendamentos</h1>
+            <p class="text-gray-600 max-w-2xl text-lg">
+                Escolha o departamento e reserve o seu horário de forma prática. Atendimento presencial ou online.
+            </p>
+        </div>
+    </header>
+
+    <!-- Área Principal -->
+    <main id="agendar" class="max-w-7xl mx-auto px-6 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- Barra Lateral Desktop -->
+            <aside class="hidden lg:block lg:w-1/4">
+                <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden sticky top-24">
+                    <div class="p-5 bg-advBlue text-white">
+                        <h3 class="font-bold uppercase text-xs tracking-tighter opacity-80">Selecione a Agenda</h3>
+                    </div>
+                    <nav class="flex flex-col">
+                        <button onclick="switchAgenda('secretaria')" id="btn-secretaria" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
+                            <i class="fas fa-file-invoice mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <span>Agenda Geral</span>
+                        </button>
+                        <button onclick="switchAgenda('pastoral')" id="btn-pastoral" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
+                            <i class="fas fa-bible mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <span>Pastoral</span>
+                        </button>
+                        <button onclick="switchAgenda('tesouraria')" id="btn-tesouraria" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
+                            <i class="fas fa-coins mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <span>Tesouraria</span>
+                        </button>
+                        <button onclick="switchAgenda('educacao')" id="btn-educacao" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
+                            <i class="fas fa-graduation-cap mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <span>Educação</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Info Card -->
+                <div class="mt-6 p-6 bg-white border border-advBlue/10 rounded-xl shadow-sm">
+                    <div class="w-10 h-10 bg-advGold/10 text-advGold rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-info"></i>
+                    </div>
+                    <h4 class="font-bold text-advBlue mb-2">Orientações</h4>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        Os links para reuniões virtuais são gerados e enviados para o seu e-mail imediatamente após a conclusão da marcação.
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Espaço do Calendário -->
+            <div class="lg:w-3/4 w-full">
+                <div class="bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden calendar-container">
+                    <div class="p-6 border-b border-gray-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <h2 id="current-title" class="text-2xl font-bold text-advBlue font-serif">Agenda Geral</h2>
+                            </div>
+                            <p id="current-desc" class="text-sm text-gray-500">Documentação oficial e pedidos de transferência.</p>
+                        </div>
+                    </div>
+
+                    <!-- Iframe Dinâmico -->
+                    <div id="iframe-wrapper" class="relative bg-gray-50 h-[600px] md:h-[750px]">
+                        <iframe 
+                            id="agenda-iframe"
+                            src="https://calendar.google.com/calendar/appointments/schedules/SECRETARIA_LINK?gv=true" 
+                            style="border: 0" 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0">
+                        </iframe>
+                        
+                        <!-- Loader -->
+                        <div id="loader" class="absolute inset-0 bg-white/90 backdrop-blur-sm flex items-center justify-center hidden">
+                            <div class="flex flex-col items-center">
+                                <div class="w-10 h-10 border-4 border-advBlue border-t-advGold rounded-full animate-spin"></div>
+                                <span class="mt-4 font-bold text-advBlue tracking-widest text-[10px] uppercase">Sincronizando...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-advBlue text-white pt-16 pb-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-8 text-center md:text-left">
+            <div class="md:col-span-2">
+                <div class="flex items-center justify-center md:justify-start space-x-2 mb-6">
+                    <div class="w-8 h-8 bg-white text-advBlue rounded flex items-center justify-center font-bold">A</div>
+                    <span class="text-xl font-bold tracking-tight font-serif uppercase">Igreja Adventista</span>
+                </div>
+                <p class="text-gray-300 text-sm max-w-sm mx-auto md:mx-0 leading-relaxed">
+                    Facilitando o atendimento ao membro através de soluções digitais.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-advGold font-bold mb-4 uppercase text-[10px] tracking-widest">Agendas</h4>
+                <ul class="text-sm space-y-3 text-gray-300">
+                    <li><button onclick="switchAgenda('secretaria')" class="hover:text-white transition">Agenda Geral</button></li>
+                    <li><button onclick="switchAgenda('pastoral')" class="hover:text-white transition">Pastoral</button></li>
+                    <li><button onclick="switchAgenda('tesouraria')" class="hover:text-white transition">Tesouraria</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-advGold font-bold mb-4 uppercase text-[10px] tracking-widest">Social</h4>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="#" class="hover:text-advGold transition"><i class="fab fa-facebook-f text-lg"></i></a>
+                    <a href="#" class="hover:text-advGold transition"><i class="fab fa-instagram text-lg"></i></a>
+                    <a href="#" class="hover:text-advGold transition"><i class="fab fa-youtube text-lg"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-[10px] text-gray-400 uppercase tracking-widest">
+            © 2026 Igreja Adventista do Sétimo Dia
+        </div>
+    </footer>
+
+    <script>
+        const agendas = {
+            secretaria: {
+                title: 'Agenda Geral',
+                desc: 'Documentação oficial, pedidos de transferência e registros de membros.',
+                link: 'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FFortaleza&src=ZWRpci5uZWdvY2lvQGdtYWlsLmNvbQ&src=MTMwY2ViNWJiZWYxZmRjNjY0MDI1ZjgwNDFkN2NjNDE2NWI2NzllNzYxYTc0ZDJlOTU0YjBjMGIxOWQyNjBlMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23039be5&color=%23d81b60'
+            },
+            pastoral: {
+                title: 'Gabinete Pastoral',
+                desc: 'Aconselhamento espiritual, visitas e oração.',
+                link: 'https://calendar.google.com/calendar/embed?src=edir.negocio%40gmail.com&ctz=America%2FFortaleza'
+            },
+            tesouraria: {
+                title: 'Tesouraria',
+                desc: 'Suporte para dízimos, ofertas e questões financeiras.',
+                link: 'https://calendar.google.com/calendar/embed?src=edir.negocio%40gmail.com&ctz=America%2FFortaleza'
+            },
+            educacao: {
+                title: 'Coordenação Pedagógica',
+                desc: 'Atendimento escolar e matrículas.',
+                link: 'https://calendar.google.com/calendar/appointments/schedules/EDUCACAO_LINK?gv=true'
+            }
+        };
+
+        // Lógica do Modal de Vídeo
+        const videoModal = document.getElementById('video-modal');
+        const modalContent = document.getElementById('modal-content');
+        const introVideo = document.getElementById('intro-video');
+
+        window.onload = function() {
+            // Mostrar o modal após o carregamento da página
+            setTimeout(() => {
+                videoModal.classList.remove('pointer-events-none');
+                videoModal.classList.add('opacity-100');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 1000);
+        };
+
+        function closeVideoModal() {
+            videoModal.classList.remove('opacity-100');
+            videoModal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            videoModal.classList.add('pointer-events-none');
+            
+            // Parar o vídeo ao fechar (enviar comando para API do Youtube)
+            introVideo.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
+
+        // Fechar ao clicar fora do conteúdo do modal
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) closeVideoModal();
+        });
+
+        // Lógica do Menu Mobile
+        const mobileMenu = document.getElementById('mobile-menu');
+        const backdrop = document.getElementById('menu-backdrop');
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('menu-open');
+            backdrop.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        menuClose.addEventListener('click', toggleMenu);
+        backdrop.addEventListener('click', toggleMenu);
+
+        // Lógica de Troca de Agendas
+        function switchAgenda(key) {
+            const config = agendas[key];
+            const iframe = document.getElementById('agenda-iframe');
+            const loader = document.getElementById('loader');
+            const titleEl = document.getElementById('current-title');
+            const descEl = document.getElementById('current-desc');
+
+            loader.classList.remove('hidden');
+
+            document.querySelectorAll('.agenda-btn').forEach(btn => {
+                btn.classList.remove('active-agenda');
+                btn.classList.add('border-transparent');
+            });
+            
+            const activeBtn = document.getElementById(`btn-${key}`);
+            if(activeBtn) {
+                activeBtn.classList.add('active-agenda');
+                activeBtn.classList.remove('border-transparent');
+            }
+
+            titleEl.textContent = config.title;
+            descEl.textContent = config.desc;
+            iframe.src = config.link;
+
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 600);
+            
+            if (window.innerWidth < 1024) {
+                document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
