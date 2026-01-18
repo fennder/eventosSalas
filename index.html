@@ -114,7 +114,7 @@
                 <div class="absolute right-0 mt-2 w-56 bg-white border border-gray-100 shadow-2xl rounded-md py-2 hidden group-hover:block animate-in fade-in slide-in-from-top-2">
                     <a href="javascript:void(0)" onclick="switchAgenda('geral')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Agenda Geral</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('jovens')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Salão Jovens</a>
-                    <a href="javascript:void(0)" onclick="switchAgenda('tesouraria')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Tesouraria e Dízimos</a>
+                    <a href="javascript:void(0)" onclick="switchAgenda('nave')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Nave</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('educacao')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Coordenação Pedagógica</a>
                 </div>
             </div>
@@ -145,8 +145,8 @@
             <button onclick="switchAgenda('jovens'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
                 <i class="fas fa-bible mr-3 w-4 text-advGold"></i> Salão Jovens
             </button>
-            <button onclick="switchAgenda('tesouraria'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
-                <i class="fas fa-coins mr-3 w-4 text-advGold"></i> Tesouraria
+            <button onclick="switchAgenda('nave'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
+                <i class="fas fa-coins mr-3 w-4 text-advGold"></i> Nave
             </button>
             <button onclick="switchAgenda('educacao'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
                 <i class="fas fa-graduation-cap mr-3 w-4 text-advGold"></i> Educação
@@ -184,17 +184,17 @@
                         <h3 class="font-bold uppercase text-xs tracking-tighter opacity-80">Selecione a Agenda</h3>
                     </div>
                     <nav class="flex flex-col">
-                        <button onclick="switchAgenda('geral')" id="btn-secretaria" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
+                        <button onclick="switchAgenda('geral')" id="btn-geral" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
                             <i class="fas fa-file-invoice mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Agenda Geral</span>
                         </button>
-                        <button onclick="switchAgenda('jovens')" id="btn-pastoral" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
+                        <button onclick="switchAgenda('jovens')" id="btn-jovens" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
                             <i class="fas fa-bible mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Salão Jovens</span>
                         </button>
-                        <button onclick="switchAgenda('tesouraria')" id="btn-tesouraria" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
+                        <button onclick="switchAgenda('nave')" id="btn-nave" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
                             <i class="fas fa-coins mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
-                            <span>Tesouraria</span>
+                            <span>Nave</span>
                         </button>
                         <button onclick="switchAgenda('educacao')" id="btn-educacao" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
                             <i class="fas fa-graduation-cap mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
@@ -269,14 +269,14 @@
                 <ul class="text-sm space-y-3 text-gray-300">
                     <li><button onclick="switchAgenda('geral')" class="hover:text-white transition">Agenda Geral</button></li>
                     <li><button onclick="switchAgenda('jovens')" class="hover:text-white transition">Salão Jovens</button></li>
-                    <li><button onclick="switchAgenda('tesouraria')" class="hover:text-white transition">Tesouraria</button></li>
+                    <li><button onclick="switchAgenda('nave')" class="hover:text-white transition">Nave</button></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-advGold font-bold mb-4 uppercase text-[10px] tracking-widest">Social</h4>
                 <div class="flex justify-center md:justify-start space-x-4">
-                    <a href="#" class="hover:text-advGold transition"><i class="fab fa-facebook-f text-lg"></i></a>
-                    <a href="#" class="hover:text-advGold transition"><i class="fab fa-instagram text-lg"></i></a>
+                    <!-- <a href="#" class="hover:text-advGold transition"><i class="fab fa-facebook-f text-lg"></i></a> -->
+                    <a href="https://www.instagram.com/adventistaspalmassul?igsh=MTBxbGJnbzR5MGIwYw==" class="hover:text-advGold transition"><i class="fab fa-instagram text-lg"></i></a>
                     <a href="#" class="hover:text-advGold transition"><i class="fab fa-youtube text-lg"></i></a>
                 </div>
             </div>
@@ -291,15 +291,15 @@
             geral: {
                 title: 'Agenda Geral',
                 desc: 'Documentação oficial, pedidos de transferência e registros de membros.',
-                link: 'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FFortaleza&showPrint=0&showTitle=0&showTz=0&src=ZWRpci5uZWdvY2lvQGdtYWlsLmNvbQ&src=NzEwMWVmYjkxNmM5NjE0MWVmZmZmOWQwYTg0MGI2MmUxYzU5NzU2ZmUzNDM1YmRjYmQ4M2FlZjUwMjZjNjJlM0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MTMwY2ViNWJiZWYxZmRjNjY0MDI1ZjgwNDFkN2NjNDE2NWI2NzllNzYxYTc0ZDJlOTU0YjBjMGIxOWQyNjBlMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039be5&color=%23f4511e&color=%23d81b60&color=%230b8043'
+                link: 'https://calendar.google.com/calendar/embed?height=700&wkst=1&ctz=America%2FFortaleza&showPrint=0&showTz=0&title=Eventos%20da%20IASD%20701&src=ZWRpci5uZWdvY2lvQGdtYWlsLmNvbQ&src=NzEwMWVmYjkxNmM5NjE0MWVmZmZmOWQwYTg0MGI2MmUxYzU5NzU2ZmUzNDM1YmRjYmQ4M2FlZjUwMjZjNjJlM0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MTMwY2ViNWJiZWYxZmRjNjY0MDI1ZjgwNDFkN2NjNDE2NWI2NzllNzYxYTc0ZDJlOTU0YjBjMGIxOWQyNjBlMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=cHQuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039be5&color=%23f4511e&color=%23d81b60&color=%230b8043'
             },
             jovens: {
                 title: 'Salão Jovens',
                 desc: 'Aconselhamento espiritual, visitas e oração.',
                 link: 'https://calendar.google.com/calendar/embed?src=edir.negocio%40gmail.com&ctz=America%2FFortaleza'
             },
-            tesouraria: {
-                title: 'Tesouraria',
+            nave: {
+                title: 'Nave',
                 desc: 'Suporte para dízimos, ofertas e questões financeiras.',
                 link: 'https://calendar.google.com/calendar/embed?src=edir.negocio%40gmail.com&ctz=America%2FFortaleza'
             },
