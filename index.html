@@ -115,11 +115,12 @@
                     <a href="javascript:void(0)" onclick="switchAgenda('geral')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Agenda Geral</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('jovens')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Salão Jovens</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('nave')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Nave</a>
+                    <a href="javascript:void(0)" onclick="switchAgenda('infantil')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Coordenação Pedagógica</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('educacao')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Coordenação Pedagógica</a>
                 </div>
             </div>
             <a href="#agendar" class="bg-advBlue text-white px-6 py-2 rounded text-sm font-bold hover:bg-advBlueDark transition shadow-lg">
-                MARCAR AGORA
+                VER AGORA
             </a>
         </div>
 
@@ -148,12 +149,15 @@
             <button onclick="switchAgenda('nave'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
                 <i class="fas fa-coins mr-3 w-4 text-advGold"></i> Nave
             </button>
+            <button onclick="switchAgenda('infantil'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
+                <i class="fas fa-graduation-cap mr-3 w-4 text-advGold"></i> Sala Infantil
+            </button>
             <button onclick="switchAgenda('educacao'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
                 <i class="fas fa-graduation-cap mr-3 w-4 text-advGold"></i> Educação
             </button>
         </div>
         <div class="mt-auto p-4 border-t border-gray-100">
-            <a href="#agendar" onclick="toggleMenu()" class="block w-full text-center bg-advBlue text-white py-3 rounded font-bold text-sm">MARCAR AGORA</a>
+            <a href="#agendar" onclick="toggleMenu()" class="block w-full text-center bg-advBlue text-white py-3 rounded font-bold text-sm">VER AGORA</a>
         </div>
     </div>
     
@@ -186,7 +190,7 @@
                     <nav class="flex flex-col">
                         <button onclick="switchAgenda('geral')" id="btn-geral" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
                             <i class="fas fa-file-invoice mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
-                            <span>Agenda Geral</span>
+                            <span>Agenda Geral MTO</span>
                         </button>
                         <button onclick="switchAgenda('jovens')" id="btn-jovens" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
                             <i class="fas fa-bible mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
@@ -195,6 +199,10 @@
                         <button onclick="switchAgenda('nave')" id="btn-nave" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
                             <i class="fas fa-coins mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Nave</span>
+                        </button>
+                        <button onclick="switchAgenda('infantil')" id="btn-infantil" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
+                            <i class="fas fa-graduation-cap mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <span>Sala Infantil</span>
                         </button>
                         <button onclick="switchAgenda('educacao')" id="btn-educacao" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
                             <i class="fas fa-graduation-cap mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
@@ -258,7 +266,7 @@
             <div class="md:col-span-2">
                 <div class="flex items-center justify-center md:justify-start space-x-2 mb-6">
                     <div class="w-8 h-8 bg-white text-advBlue rounded flex items-center justify-center font-bold">A</div>
-                    <span class="text-xl font-bold tracking-tight font-serif uppercase">Igreja Adventista</span>
+                    <span class="text-xl font-bold tracking-tight font-serif uppercase">Igreja Adventista do Sétimo Dia Palmas 701 Sul</span>
                 </div>
                 <p class="text-gray-300 text-sm max-w-sm mx-auto md:mx-0 leading-relaxed">
                     Facilitando o atendimento ao membro através de soluções digitais.
@@ -277,7 +285,7 @@
                 <div class="flex justify-center md:justify-start space-x-4">
                     <!-- <a href="#" class="hover:text-advGold transition"><i class="fab fa-facebook-f text-lg"></i></a> -->
                     <a href="https://www.instagram.com/adventistaspalmassul?igsh=MTBxbGJnbzR5MGIwYw==" class="hover:text-advGold transition"><i class="fab fa-instagram text-lg"></i></a>
-                    <a href="#" class="hover:text-advGold transition"><i class="fab fa-youtube text-lg"></i></a>
+                    <a href="https://www.youtube.com/@IgrejaAdventistaPalmasSul701" class="hover:text-advGold transition"><i class="fab fa-youtube text-lg"></i></a>
                 </div>
             </div>
         </div>
@@ -296,12 +304,17 @@
             jovens: {
                 title: 'Salão Jovens',
                 desc: 'Aconselhamento espiritual, visitas e oração.',
-                link: 'https://calendar.google.com/calendar/embed?src=edir.negocio%40gmail.com&ctz=America%2FFortaleza'
+                link: 'https://calendar.app.google/7zCVPQWk4ZnZ4DTr8'
             },
             nave: {
                 title: 'Nave',
                 desc: 'Suporte para dízimos, ofertas e questões financeiras.',
                 link: 'https://calendar.google.com/calendar/embed?src=edir.negocio%40gmail.com&ctz=America%2FFortaleza'
+            },
+            infantil: {
+                title: 'Coordenação Pedagógica',
+                desc: 'Atendimento escolar e matrículas.',
+                link: 'https://calendar.google.com/calendar/appointments/schedules/EDUCACAO_LINK?gv=true'
             },
             educacao: {
                 title: 'Coordenação Pedagógica',
