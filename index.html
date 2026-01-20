@@ -113,6 +113,8 @@
                 </button>
                 <div class="absolute right-0 mt-2 w-56 bg-white border border-gray-100 shadow-2xl rounded-md py-2 hidden group-hover:block animate-in fade-in slide-in-from-top-2">
                     <a href="javascript:void(0)" onclick="switchAgenda('geral')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Agenda Geral MTO</a>
+                    <a href="javascript:void(0)" onclick="switchAgenda('mto')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Agenda MTO</a>
+                    <a href="javascript:void(0)" onclick="switchAgenda('igreja')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Agenda Igreja</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('jovens')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Salão Jovens</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('nave')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Nave</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('infantil')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Sala Infantil</a>
@@ -142,6 +144,12 @@
             <span class="px-3 pt-2 text-[10px] uppercase tracking-widest text-advSilver font-bold">Trocar Agenda</span>
             <button onclick="switchAgenda('geral'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
                 <i class="fas fa-file-invoice mr-3 w-4 text-advGold"></i> Agenda Geral MTO
+            </button>
+            <button onclick="switchAgenda('mto'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
+                <i class="fas fa-file-invoice mr-3 w-4 text-advGold"></i> Agenda MTO
+            </button>
+            <button onclick="switchAgenda('igreja'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
+                <i class="fas fa-file-invoice mr-3 w-4 text-advGold"></i> Agenda Igreja
             </button>
             <button onclick="switchAgenda('jovens'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
                 <i class="fas fa-bible mr-3 w-4 text-advGold"></i> Salão Jovens
@@ -191,6 +199,13 @@
                         <button onclick="switchAgenda('geral')" id="btn-geral" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
                             <i class="fas fa-file-invoice mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Agenda Geral MTO</span>
+                        </button>
+                        <button onclick="switchAgenda('mto')" id="btn-mto" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
+                            <i class="fas fa-file-invoice mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <span>Agenda MTO</span>
+                        </button><button onclick="switchAgenda('igreja')" id="btn-igreja" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
+                            <i class="fas fa-file-invoice mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <span>Agenda Igreja</span>
                         </button>
                         <button onclick="switchAgenda('jovens')" id="btn-jovens" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
                             <i class="fas fa-bible mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
@@ -277,6 +292,8 @@
                 <h4 class="text-advGold font-bold mb-4 uppercase text-[10px] tracking-widest">Agendas</h4>
                 <ul class="text-sm space-y-3 text-gray-300">
                     <li><button onclick="switchAgenda('geral')" class="hover:text-white transition">Agenda Geral</button></li>
+                    <li><button onclick="switchAgenda('mto')" class="hover:text-white transition">Agenda MTO</button></li>
+                    <li><button onclick="switchAgenda('igreja')" class="hover:text-white transition">Agenda Igreja</button></li>
                     <li><button onclick="switchAgenda('jovens')" class="hover:text-white transition">Salão Jovens</button></li>
                     <li><button onclick="switchAgenda('nave')" class="hover:text-white transition">Nave</button></li>
                     <li><button onclick="switchAgenda('infantil')" class="hover:text-white transition">Salão Infantil</button></li>
@@ -303,6 +320,16 @@
                 title: 'Agenda Geral',
                 desc: 'Documentação oficial, pedidos de transferência e registros de membros.',
                 link: 'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FAraguaina&showPrint=0&src=YWR2cGFsbWFzc3VsQGdtYWlsLmNvbQ&src=ODc0OTc4MzFiOTZlZDhhMDNkMDA1OGYyMGM0NTNlNzZmZGI3ZDc2OTM4ODFlMTZmZjA3YWM4NWQ0OWJmODM2ZkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MzA3MmQwNGIwYWRiYjczMTc0MWMzYWU0MzExN2Q3MjEwZWU4YWY5M2VkYjU0MzYwNzA3NGJkYzNkOWEyZDE1MUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NDUzYTNlZDFjNTRmYmJmZTE0ZWYxZjM4YmYzYTgzN2MwMjI5ODk5MDc0MGNlOTZmYTQzYTQwMzc2YWJlODU0ZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=M2UzYzlkMGE0M2FhODI5ZjE5ZWJkMmZlOGRmMWVlNDQ2MGUyM2FjNjhjMDQ5OGNkMzk1YTUzMjFlMDBiMzdhNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MTMwY2ViNWJiZWYxZmRjNjY0MDI1ZjgwNDFkN2NjNDE2NWI2NzllNzYxYTc0ZDJlOTU0YjBjMGIxOWQyNjBlMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=cHQtYnIuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039be5&color=%23c0ca33&color=%23616161&color=%23009688&color=%23d50000&color=%23d81b60&color=%230b8043'
+            },
+            mto: {
+                title: 'Agenda MTO',
+                desc: 'Documentação oficial, pedidos de transferência e registros de membros.',
+                link: 'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FAraguaina&showPrint=0&showTz=0&src=MTMwY2ViNWJiZWYxZmRjNjY0MDI1ZjgwNDFkN2NjNDE2NWI2NzllNzYxYTc0ZDJlOTU0YjBjMGIxOWQyNjBlMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=cHQtYnIuYnJhemlsaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23d81b60&color=%230b8043'
+            },
+            igreja: {
+                title: 'Agenda Igreja',
+                desc: 'Documentação oficial, pedidos de transferência e registros de membros.',
+                link: 'https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FAraguaina&showPrint=0&showTz=0&src=YWR2cGFsbWFzc3VsQGdtYWlsLmNvbQ&color=%23039be5'
             },
             jovens: {
                 title: 'Salão Jovens',
