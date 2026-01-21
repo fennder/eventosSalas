@@ -118,7 +118,7 @@
                     <a href="javascript:void(0)" onclick="switchAgenda('jovens')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Salão Jovens</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('nave')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Nave</a>
                     <a href="javascript:void(0)" onclick="switchAgenda('infantil')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Sala Infantil</a>
-                    <a href="javascript:void(0)" onclick="switchAgenda('cozinha')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Coordenação Pedagógica</a>
+                    <a href="javascript:void(0)" onclick="switchAgenda('cozinha')" class="block px-4 py-2 text-sm hover:bg-advLight hover:text-advBlue transition border-l-2 border-transparent hover:border-advGold">Cozinha</a>
                 </div>
             </div>
             <a href="#agendar" class="bg-advBlue text-white px-6 py-2 rounded text-sm font-bold hover:bg-advBlueDark transition shadow-lg">
@@ -143,25 +143,25 @@
             <hr class="border-gray-100">
             <span class="px-3 pt-2 text-[10px] uppercase tracking-widest text-advSilver font-bold">Trocar Agenda</span>
             <button onclick="switchAgenda('geral'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
-                <i class="fas fa-file-invoice mr-3 w-4 text-advGold"></i> Agenda Geral MTO
+                <i class="fas fa-bible mr-3 w-4 text-advGold"></i> Agenda Geral MTO
             </button>
             <button onclick="switchAgenda('mto'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
-                <i class="fas fa-file-invoice mr-3 w-4 text-advGold"></i> Agenda MTO
+                <i class="fas fa-bible mr-3 w-4 text-advGold"></i> Agenda MTO
             </button>
             <button onclick="switchAgenda('igreja'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
-                <i class="fas fa-file-invoice mr-3 w-4 text-advGold"></i> Agenda Igreja
+                <i class="fas fa-bible mr-3 w-4 text-advGold"></i> Agenda Igreja
             </button>
             <button onclick="switchAgenda('jovens'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
-                <i class="fas fa-bible mr-3 w-4 text-advGold"></i> Salão Jovens
+                <i class="fas fa-graduation-cap mr-3 w-4 text-advGold"></i> Salão Jovens
             </button>
             <button onclick="switchAgenda('nave'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
-                <i class="fas fa-coins mr-3 w-4 text-advGold"></i> Nave
+                <i class="fas fa-bible mr-3 w-4 text-advGold"></i> Nave
             </button>
             <button onclick="switchAgenda('infantil'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
                 <i class="fas fa-graduation-cap mr-3 w-4 text-advGold"></i> Sala Infantil
             </button>
             <button onclick="switchAgenda('cozinha'); toggleMenu();" class="text-left p-3 text-sm hover:bg-advLight rounded-lg transition flex items-center">
-                <i class="fas fa-graduation-cap mr-3 w-4 text-advGold"></i> Cozinha
+                <i class="fas fas fa-coffee mr-3 w-4 text-advGold"></i> Cozinha
             </button>
         </div>
         <div class="mt-auto p-4 border-t border-gray-100">
@@ -197,22 +197,22 @@
                     </div>
                     <nav class="flex flex-col">
                         <button onclick="switchAgenda('geral')" id="btn-geral" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
-                            <i class="fas fa-file-invoice mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <i class="fas fa-bible mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Agenda Geral MTO</span>
                         </button>
                         <button onclick="switchAgenda('mto')" id="btn-mto" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
-                            <i class="fas fa-file-invoice mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <i class="fas fa-bible mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Agenda MTO</span>
                         </button><button onclick="switchAgenda('igreja')" id="btn-igreja" class="agenda-btn active-agenda text-left p-4 hover:bg-advLight transition flex items-center group">
-                            <i class="fas fa-file-invoice mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <i class="fas fa-bible mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Agenda Igreja</span>
                         </button>
                         <button onclick="switchAgenda('jovens')" id="btn-jovens" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
-                            <i class="fas fa-bible mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <i class="fas fa-graduation-cap mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Salão Jovens</span>
                         </button>
                         <button onclick="switchAgenda('nave')" id="btn-nave" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
-                            <i class="fas fa-coins mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <i class="fas fa-bible mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Nave</span>
                         </button>
                         <button onclick="switchAgenda('infantil')" id="btn-infantil" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
@@ -220,7 +220,7 @@
                             <span>Sala Infantil</span>
                         </button>
                         <button onclick="switchAgenda('cozinha')" id="btn-cozinha" class="agenda-btn text-left p-4 hover:bg-advLight transition flex items-center border-l-4 border-transparent group">
-                            <i class="fas fa-graduation-cap mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
+                            <i class="fas fa-coffee mr-3 w-5 text-advSilver group-hover:text-advBlue transition"></i> 
                             <span>Cozinha</span>
                         </button>
                     </nav>
